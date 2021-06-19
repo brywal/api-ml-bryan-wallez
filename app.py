@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+import pandas as pd
 import numpy as np
 import joblib
 import traceback
