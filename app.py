@@ -15,12 +15,14 @@ def hello():
 @app.route('/predict', methods=['POST'])
 def predict():
     model = joblib.load("model.pkl")
+    model_columns = joblib.load("model_cols.pkl")
     if model:
         try:
             json = request.get_json()
             values = list(json[0].values())
             values = np.array(values)
-            prediction = model.predict(values)
+            x = pd.DataFrame(data=values, columns=model_columns)
+            prediction = model.predict(x)
             print("here:", prediction)
             return jsonify({'prediction': str(prediction[0])})
         except:
