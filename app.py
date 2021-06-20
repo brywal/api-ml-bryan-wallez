@@ -19,6 +19,7 @@ def predict():
         try:
             json = request.get_json()
             values = list(json[0].values())
+            values = np.array(values)
             prediction = model.predict(values)
             print("here:", prediction)
             return jsonify({'prediction': str(prediction[0])})
