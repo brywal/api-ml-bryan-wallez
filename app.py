@@ -18,8 +18,7 @@ def predict():
     if model:
         try:
             json = request.get_json()
-            temp = list(json[0].values())
-            values = np.array(temp)
+            values = list(json[0].values())
             prediction = model.predict(values)
             print("here:", prediction)
             return jsonify({'prediction': str(prediction[0])})
