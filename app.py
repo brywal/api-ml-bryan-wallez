@@ -41,11 +41,9 @@ def predict():
     if model:
         try:
             json = request.get_json()
-            values = list(json[0].values())
-            values = np.array(values)
-            x = pd.DataFrame(data=values, columns=model_columns)
+            values = json.loads(json[0])
+            x = pd.DataFrame(data=values)
             prediction = model.predict(x)
-            print("here:", prediction)
             return jsonify({'prediction': str(prediction[0])})
         except:
             return jsonify({'trace': traceback.format_exc()})
